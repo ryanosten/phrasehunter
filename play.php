@@ -2,11 +2,25 @@
 require 'inc/Game.php';
 require 'inc/Phrase.php';
 
-$phrase = new Phrase('yipp yyo kaiyay', ['k', 'b', 'l']);
+session_start();
+
+if(!isset($_SESSION['selected'])){
+    $_SESSION['selected'] = [];
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $key = filter_input(INPUT_POST, 'key', FILTER_SANITIZE_STRING);
+    $_SESSION['phrase'] = filter_input(INPUT_POST, 'phrase', FILTER_SANITIZE_STRING);
+
+    $_SESSION['selected'][] = $key;
+}
+
+$_SESSION['phrase'] = "You dont know jack";
+
+$phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
 $game = new Game($phrase);
 
-echo $phrase->addPhraseToDisplay();
-
+var_dump($_SESSION['selected']);
 
 
 ?>
@@ -25,10 +39,12 @@ echo $phrase->addPhraseToDisplay();
 
 <body>
 <div class="main-container">
-    <div id="banner" class="section">
-        <h2 class="header">Phrase Hunter</h2>
-    </div>
+    <h2 class="header">Phrase Hunter</h2>
+    <?= $phrase->addPhraseToDisplay(); ?>
 </div>
+<?= $game->displayKeyboard(); ?>
+<?= $game->displayScore() ;?>
 
 </body>
 </html>
+

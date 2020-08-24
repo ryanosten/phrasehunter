@@ -4,12 +4,12 @@ class Phrase
 {
 
     private $currentPhrase;
-    private $selected= [];
+    private $selected = [];
 
     public function __construct($phrase = null, $selected = null)
     {
         if (!empty($phrase)) {
-            $this->currentPhrase = $phrase;
+            $this->currentPhrase = strtolower($phrase);
         } else {
             $this->currentPhrase = 'Dream Big Little One';
         }
@@ -52,8 +52,16 @@ class Phrase
         $this->selected[] = $letter;
     }
 
-    public function checkLetter()
+    public function getSelected()
     {
+        return $this->selected;
+    }
+
+    public function checkLetter($letter)
+    {
+        $phraseArray = array_unique(str_split(str_replace(' ', '', $this->currentPhrase)));
+
+        return in_array($letter, $phraseArray);
 
     }
 
