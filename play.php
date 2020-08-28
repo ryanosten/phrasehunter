@@ -4,6 +4,11 @@ require 'inc/Phrase.php';
 
 session_start();
 
+if (isset($_POST['start'])){
+ session_destroy();
+ header('Location: ' . 'http://' . $_SERVER['HTTP_HOST'] . '/play.php');
+}
+
 if(!isset($_SESSION['selected'])){
     $_SESSION['selected'] = [];
 }
@@ -15,13 +20,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['selected'][] = $key;
 }
 
-$_SESSION['phrase'] = "You dont know jack";
-
-$phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+//isn't it odd to instantiate the Phrase and Game instances every time this page loads?
+$phrase = new Phrase(null, $_SESSION['selected']);
 $game = new Game($phrase);
 
-var_dump($_SESSION['selected']);
+$_SESSION['phrase'] = $phrase->getCurrentPhrase();
 
+var_dump($phrase)
 
 ?>
 

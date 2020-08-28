@@ -5,13 +5,23 @@ class Phrase
 
     private $currentPhrase;
     private $selected = [];
+    public $phrases = [
+        'Boldness be my friend',
+        'Leave no stone unturned',
+        'Broken crayons still color',
+        'The adventure begins',
+        'Love without limits'
+    ];
+
+    //why does study guide display $phrases property as public. I thought best practice was to make these private
 
     public function __construct($phrase = null, $selected = null)
     {
         if (!empty($phrase)) {
             $this->currentPhrase = strtolower($phrase);
         } else {
-            $this->currentPhrase = 'Dream Big Little One';
+            $rand_key = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$rand_key];
         }
 
         if (!empty($selected)) {
@@ -31,6 +41,8 @@ class Phrase
         foreach ($characters as $char) {
             if (ctype_space($char)) {
                 $html .= '<li class="hide space"> </li>';
+            } else if (in_array($char, $this->selected)) {
+                $html .= '<li class="show letter ' . $char . '">' . $char .'</li>';
             } else {
                 $html .= '<li class="hide letter ' . $char . '">' . $char .'</li>';
             }
@@ -64,5 +76,6 @@ class Phrase
         return in_array($letter, $phraseArray);
 
     }
+    
 
 }
