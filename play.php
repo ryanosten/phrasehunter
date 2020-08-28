@@ -15,18 +15,24 @@ if(!isset($_SESSION['selected'])){
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $key = filter_input(INPUT_POST, 'key', FILTER_SANITIZE_STRING);
-    $_SESSION['phrase'] = filter_input(INPUT_POST, 'phrase', FILTER_SANITIZE_STRING);
+//    $_SESSION['phrase'] = filter_input(INPUT_POST, 'phrase', FILTER_SANITIZE_STRING);
 
     $_SESSION['selected'][] = $key;
 }
 
 //isn't it odd to instantiate the Phrase and Game instances every time this page loads?
-$phrase = new Phrase(null, $_SESSION['selected']);
+if (!isset($_SESSION['phrase'])){
+    echo 'its not set';
+    $phrase = new Phrase(null, $_SESSION['selected']);
+} else {
+    echo 'its set';
+    $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+}
 $game = new Game($phrase);
 
 $_SESSION['phrase'] = $phrase->getCurrentPhrase();
 
-var_dump($phrase)
+//var_dump($phrase)
 
 ?>
 
