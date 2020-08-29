@@ -94,6 +94,14 @@ class Game
     public function checkForWin()
     {
 
+        $intersect = array_intersect($this->phrase->getSelected(), $this->phrase->getLetterArray());
+
+        if(count($intersect) == count($this->phrase->getLetterArray())) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public function checkForLose()
@@ -103,9 +111,14 @@ class Game
 
     public function gameOver()
     {
-        $html = '<h1 id="game-over-message">';
-        $html .= 'Congratulations on guessing: "The adventure begins"</h1>';
-        $html .= '<h1 id="game-over-message">The phrase was: "The adventure begins". Better luck next time!</h1>';
+        if($this->checkForWin()) {
+            $html = '<h1 id="game-over-message">';
+            $html .= 'Congratulations on guessing: ' . $this->phrase->getCurrentPhrase() . '</h1>';
+            $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "green"; </script>';
+        } else if ($this->checkForLose()){
+            $html = '<h1 id="game-over-message">The phrase was: ' . $this->phrase->getCurrentPhrase().  '. Better luck next time!</h1>';
+            $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "red"; </script>';
+        }
 
         return $html;
 

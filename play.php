@@ -51,14 +51,18 @@ $game->checkForLose();
 
 <body>
 <div class="main-container">
+    <h2 class="header">Phrase Hunter</h2>
     <?php
-    if ($game->checkForLose() == false) {
-        echo '<h2 class="header">Phrase Hunter</h2>';
+    if ($game->checkForLose() == false && $game->checkForWin() == false) {
         echo $phrase->addPhraseToDisplay();
         echo '</div>';
         echo $game->displayKeyboard();
         echo $game->displayScore();
     } else {
+        ?>
+
+
+    <?php
         echo $game->gameOver();
     }
     ?>
