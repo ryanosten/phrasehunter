@@ -22,17 +22,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 //isn't it odd to instantiate the Phrase and Game instances every time this page loads?
 if (!isset($_SESSION['phrase'])){
-    echo 'its not set';
     $phrase = new Phrase(null, $_SESSION['selected']);
 } else {
-    echo 'its set';
     $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
 }
 $game = new Game($phrase);
 
 $_SESSION['phrase'] = $phrase->getCurrentPhrase();
 
-//var_dump($phrase)
+$game->calculateLives();
+$game->checkForLose();
+//var_dump($game->checkForLose());
+
 
 ?>
 
@@ -50,11 +51,19 @@ $_SESSION['phrase'] = $phrase->getCurrentPhrase();
 
 <body>
 <div class="main-container">
-    <h2 class="header">Phrase Hunter</h2>
-    <?= $phrase->addPhraseToDisplay(); ?>
-</div>
-<?= $game->displayKeyboard(); ?>
-<?= $game->displayScore() ;?>
+    <?php
+    if ($game->checkForLose() == false) {
+        echo '<h2 class="header">Phrase Hunter</h2>';
+        echo $phrase->addPhraseToDisplay();
+        echo '</div>';
+        echo $game->displayKeyboard();
+        echo $game->displayScore();
+    } else {
+        echo $game->gameOver();
+    }
+    ?>
+
+
 
 </body>
 </html>

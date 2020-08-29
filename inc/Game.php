@@ -77,6 +77,20 @@ class Game
         }
     }
 
+    public function getNumWrong()
+    {
+        $wrongLetters = array_diff($this->phrase->getSelected(), $this->phrase->getLetterArray());
+
+        return count($wrongLetters);
+    }
+
+    public function calculateLives()
+    {
+        $livesLeft = ($this->lives) - ($this->getNumWrong());
+
+        $this->lives = $livesLeft;
+    }
+
     public function checkForWin()
     {
 
@@ -84,11 +98,16 @@ class Game
 
     public function checkForLose()
     {
-
+        return $this->lives < 1;
     }
 
     public function gameOver()
     {
+        $html = '<h1 id="game-over-message">';
+        $html .= 'Congratulations on guessing: "The adventure begins"</h1>';
+        $html .= '<h1 id="game-over-message">The phrase was: "The adventure begins". Better luck next time!</h1>';
+
+        return $html;
 
     }
 

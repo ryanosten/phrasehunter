@@ -69,11 +69,19 @@ class Phrase
         return $this->selected;
     }
 
+    public function getLetterArray()
+    {
+        $uniqueLetters = array_unique(str_split(str_replace(' ', '', $this->currentPhrase)));
+
+
+        return $uniqueLetters;
+    }
+
     public function checkLetter($letter)
     {
-        $phraseArray = array_unique(str_split(str_replace(' ', '', $this->currentPhrase)));
+        $uniqueLetters = $this->getLetterArray();
 
-        return in_array($letter, $phraseArray);
+        return in_array($letter, $uniqueLetters);
 
     }
     
