@@ -112,12 +112,14 @@ class Game
     public function gameOver()
     {
         if($this->checkForWin()) {
-            $html = '<h1 id="game-over-message">';
+            $html = '<h1 id="game-over-message" style="color: white">';
             $html .= 'Congratulations on guessing: ' . $this->phrase->getCurrentPhrase() . '</h1>';
             $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "green"; </script>';
+            $html .= '<script>  document.getElementsByClassName("header")[0].style.color = "white"; </script>';
         } else if ($this->checkForLose()){
-            $html = '<h1 id="game-over-message">The phrase was: ' . $this->phrase->getCurrentPhrase().  '. Better luck next time!</h1>';
+            $html = '<h1 id="game-over-message" style="color: white">The phrase was: ' . $this->phrase->getCurrentPhrase().  '. Better luck next time!</h1>';
             $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "red"; </script>';
+            $html .= '<script>  document.getElementsByClassName("header")[0].style.color = "white"; </script>';
         }
 
         return $html;

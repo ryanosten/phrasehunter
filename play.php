@@ -62,8 +62,11 @@ $game->checkForLose();
         ?>
 
 
+    <?= $game->gameOver(); ?>
+    <form action="play.php" method="post">
+        <input id="btn__reset" type="submit" name="start" value="Start Game" />
+    </form>
     <?php
-        echo $game->gameOver();
     }
     ?>
 

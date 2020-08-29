@@ -216,5 +216,5 @@ input[type=submit].correct {
 }
 
 #game-over-message {
-  margin-top: -600px;
+  margin-top: -200px;
 }
