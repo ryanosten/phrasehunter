@@ -54,7 +54,7 @@ $game->checkForLose();
 <div class="main-container">
     <h2 class="header">Phrase Hunter</h2>
     <?php
-    if ($game->checkForLose() == false && $game->checkForWin() == false) {
+    if (!$game->gameOver()) {
         echo $phrase->addPhraseToDisplay();
         echo '</div>';
         echo $game->displayKeyboard();

@@ -13,8 +13,9 @@ class Phrase
         'Love without limits'
     ];
 
-    //why does study guide display $phrases property as public. I thought best practice was to make these private
+    //why does study guide advise to display $phrases property as public. I thought best practice was to make these private
 
+    //constructor function for Phrase. Takes $phrase and $selected args. If phrase empty, grabs random phrase from $phrases property.
     public function __construct($phrase = null, $selected = null)
     {
         if (!empty($phrase)) {
@@ -29,6 +30,7 @@ class Phrase
         }
     }
 
+    //handles adding phrase to the page. Checks if any elements in selected property are also in currentPhrase. If yes, it displays the letter
     public function addPhraseToDisplay()
     {
 
@@ -69,6 +71,7 @@ class Phrase
         return $this->selected;
     }
 
+    //this function returns an array of unique characters in the currentPhrase
     public function getLetterArray()
     {
         $uniqueLetters = array_unique(str_split(str_replace(' ', '', $this->currentPhrase)));
@@ -77,6 +80,7 @@ class Phrase
         return $uniqueLetters;
     }
 
+    //this function takes a letter as arg and checks if letter exists in curentPhrase by calling getLetterArray. If yes it returns true.
     public function checkLetter($letter)
     {
         $uniqueLetters = $this->getLetterArray();

@@ -2,22 +2,24 @@
 
 class Game
 {
+    //create phrase and lives properties
     private $phrase;
     private $lives = 5;
 
+    //construct function takes phrase object and assigns it to the phrase property of Game class instance
     public function __construct(Phrase $phrase)
     {
         $this->phrase = $phrase;
     }
 
+    //this function handles displaying the keyboard. It calls update keyboard to decide how to display individual keys
     public function displayKeyboard()
     {
         $firstRow = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
         $secondRow = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
         $thirdRow = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
-        $html =
-            '<form id="keyboard" method="post" action="play.php">
+        $html = '<form id="keyboard" method="post" action="play.php">
                 <input class="text" type=text id=key name=key  value="" hidden/>
                 <div id="qwerty" class="section">
                     <div class="keyrow">';
@@ -46,25 +48,23 @@ class Game
 
     }
 
+    // this function displays the lives. It loops through the lives property and displays a heart for each life
     public function displayScore()
     {
-        $html = '
-            <div id="scoreboard" class="section">
-                <ol>
-                ';
+        $html = '<div id="scoreboard" class="section"><ol>';
         for($i=0; $i < $this->lives; $i++) {
             $html .= '<li class="tries"><img src="images/liveHeart.png" height="35px" widght="30px"></li>';
         }
 
-        $html .= '
-            </ol>
-        </div>
-        ';
+        $html .= '</ol></div>';
 
         return $html;
 
     }
 
+    //this function decides how to display each key on keyboard. It checks if a key passed as argument is in the selected property of phrase object,
+    //if not in selected array, it displays key as normal. It then checks if key is in the array of phrase letters, if yes it displays key as a correct guess,
+    //If not it displays key as incorrect letter guess
     public function updateKeyboard($key)
     {
         if(!in_array($key, $this->phrase->getSelected())){
@@ -78,6 +78,7 @@ class Game
         }
     }
 
+    //this function counts the number of wrong letters guesses
     public function getNumWrong()
     {
         $wrongLetters = array_diff($this->phrase->getSelected(), $this->phrase->getLetterArray());
@@ -85,6 +86,7 @@ class Game
         return count($wrongLetters);
     }
 
+    //this method calculates number of lives remaining
     public function calculateLives()
     {
         $livesLeft = ($this->lives) - ($this->getNumWrong());
@@ -92,6 +94,7 @@ class Game
         $this->lives = $livesLeft;
     }
 
+    //this method checks for win
     public function checkForWin()
     {
 
@@ -105,11 +108,13 @@ class Game
 
     }
 
+    //this method checks for loss
     public function checkForLose()
     {
         return $this->lives < 1;
     }
 
+    //this method checks for win or loss and displays appropriate html for win loss screen
     public function gameOver()
     {
         if($this->checkForWin()) {
@@ -117,13 +122,17 @@ class Game
             $html .= 'Congratulations on guessing: ' . $this->phrase->getCurrentPhrase() . '</h1>';
             $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "green"; </script>';
             $html .= '<script>  document.getElementsByClassName("header")[0].style.color = "white"; </script>';
+            return $html;
         } else if ($this->checkForLose()){
             $html = '<h1 id="game-over-message" style="color: white">The phrase was: ' . $this->phrase->getCurrentPhrase().  '. Better luck next time!</h1>';
             $html .= '<script>  document.getElementsByTagName("body")[0].style.background = "red"; </script>';
             $html .= '<script>  document.getElementsByClassName("header")[0].style.color = "white"; </script>';
+            return $html;
+        } else {
+            return false;
         }
 
-        return $html;
+
 
     }
 
