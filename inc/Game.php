@@ -17,7 +17,8 @@ class Game
         $thirdRow = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
         $html =
-            '<form method="post" action="play.php">
+            '<form id="keyboard" method="post" action="play.php">
+                <input class="text" type=text id=key name=key  value="" hidden/>
                 <div id="qwerty" class="section">
                     <div class="keyrow">';
         foreach ($firstRow as $key) {
@@ -125,8 +126,5 @@ class Game
         return $html;
 
     }
-
-
-
 
 }

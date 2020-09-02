@@ -35,6 +35,7 @@ $game->checkForLose();
 //var_dump($game->checkForLose());
 
 
+
 ?>
 
 
@@ -64,14 +65,13 @@ $game->checkForLose();
 
     <?= $game->gameOver(); ?>
     <form action="play.php" method="post">
-        <input id="btn__reset" type="submit" name="start" value="Start Game" />
+        <input id="btn__reset" type="submit" name="start" value="Play Again" />
     </form>
     <?php
     }
     ?>
 
-
-
+    <script src="scripts.js"></script>
 </body>
 </html>
 
