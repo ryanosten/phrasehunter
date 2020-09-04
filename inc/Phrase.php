@@ -6,11 +6,16 @@ class Phrase
     private $currentPhrase;
     private $selected = [];
     public $phrases = [
-        'Boldness be my friend',
+        'Head Over Heels',
         'Leave no stone unturned',
-        'Broken crayons still color',
-        'The adventure begins',
-        'Love without limits'
+        'Raining Cats and Dogs',
+        'Playing For Keeps',
+        'Beating Around the Bush',
+        'Quick On the Draw',
+        'Keep Your Shirt On',
+        'Keep Your Eyes Peeled',
+        'Down To The Wire',
+        'Birds of a Feather Flock Together'
     ];
 
     //why does study guide advise to display $phrases property as public. I thought best practice was to make these private

@@ -57,6 +57,7 @@ $game->checkForLose();
     if (!$game->gameOver()) {
         echo $phrase->addPhraseToDisplay();
         echo '</div>';
+        echo'<p class="helper">Click a button or type on your keyboard</p>';
         echo $game->displayKeyboard();
         echo $game->displayScore();
     } else {

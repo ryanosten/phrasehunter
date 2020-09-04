@@ -218,3 +218,7 @@ input[type=submit].correct {
 #game-over-message {
   margin-top: -200px;
 }
+
+.helper {
+  text-align: center;
+}
