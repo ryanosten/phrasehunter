@@ -72,9 +72,9 @@ class Game
         }
 
         if($this->phrase->checkLetter($key)) {
-            return '<button class="key correct" type="submit" name="key" style="background-color: green" value="' . $key . '" disabled>' . $key . '</button>';
+            return '<button class="key correct" type="submit" name="key" style="background-color: #48db73; color: white" value="' . $key . '" disabled>' . $key . '</button>';
         } else {
-            return '<button class="key incorrect" type="submit" name="key" style="background-color: red" value="' . $key . '" disabled>' . $key . '</button>';
+            return '<button class="key incorrect" type="submit" name="key" style="background-color: #ff005c; color: white" value="' . $key . '" disabled>' . $key . '</button>';
         }
     }
 

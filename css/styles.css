@@ -222,3 +222,7 @@ input[type=submit].correct {
 .helper {
   text-align: center;
 }
+
+.key {
+  box-shadow: 2px 2px lightslategrey;
+}
