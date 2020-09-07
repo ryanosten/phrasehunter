@@ -118,8 +118,6 @@ input[type=submit].correct {
 }
 
 .show {
-  color: #fff;
-  background-color: #4ac0d5;
   font-size: 20px;
   height: 65px;
   width: 65px;
@@ -128,6 +126,9 @@ input[type=submit].correct {
   border-radius: 5px;
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
+  border: 1px solid #4ac0d5;
+  background-color: white;
+  color: black;
 }
 
 
